@@ -1,0 +1,178 @@
+React
+
+// React uma biblioteca de criação do facebook que usamos para facilitar a criação de interfaces de UI (tudo aquilo que o cliente tem contato).
+
+// - Um dos seus principais princípio e o da componentização, aonde criamos componentes que podem ser usados em lugares direto do código, de forma que só precisamos fazer a criação desses elementos uma única vez,
+
+// - há algumas formas de fazer a criação de uma estrutura básica de React, o mais comum e pela criação própria da aplicação ou pelo vitte que basicamente ambos realizam a mesma função.
+
+// comanda para criação de uma nova aplicação.
+
+// -npx create-react-app my-app
+
+// o comando acima faz a criação de uma nova aplicação react, o nome my-app e o nome que será dado a aplicação acima, pode ser mudado. 
+
+// cd my-app
+// npm start
+
+// os comandos acima servem para entrar na nova pasta criada é dá um start no servidor interno da aplicação assim tendo um ambiente de desenvolvimento.
+
+// #Basicamente, a maioria dos arquivos aonde faremos as nossas mudanças e criações, estão dentro da pasta SRC, o APP.JS e aonde a nossa aplicação e renderizada e transformada em código html e javascript,
+
+// -Componentização ocorre por criação de elementos para nossa aplicação aonde podemos reutilizar esses elementos através das props juntamente com uma ferramenta do javascript que faz a desestruturação desse elemento que simplifica o seu uso e deixa um código mais limpo e claro. 
+// exemplo:
+export default Loguin
+
+
+Props
+
+// a palavra que estar nos parâmetros da função e usada para que possamos alterar as propriedades desse elemento assim como no exemplo (label) a palavra chave e colocada entrar {} para que o javascript entenda que é um elemento de parâmetro para aquele componente.
+
+function Loguin ({label}){ 
+
+    return(
+        <div className={styles.divisao}>
+            <label className={styles.item}>{label}</label>
+            <input className={styles.item}></input>
+        </div>
+    )
+}
+
+ return (
+    <div >
+      <h3>Faça seu Loguin</h3>
+      <Loguin label="Loguin: "/>
+      <Loguin label="Senha: "/>
+    </div>
+
+// Para que seja usada de forma correta deve-se passar a palavra reservada mais 
+// = e passar os valores desse componente, podemos usar valores dinâmicos
+
+VALIDANDO OS TYPES DE CADA PROP E PASSANDO VALORES PADRÃO
+
+podemos fazer uma validação de dados a nível de programador aonde informamos o tipo de variável que vai ser passada para prop como strig, number, boleana etc,
+a validação ocorre por meio de um módulo que já está presente no react o 
+
+import PropTypes from 'prop-types'
+
+para sua utilização usamos o nome da sua função e nomeamos a chaves com o tipo de valores a seram passados.
+
+import PropTypes from 'prop-types'
+
+function Loguin ({label}){ 
+    return(
+        <>
+            <label className={styles.item}>{label}</label>
+            <input className={styles.item}></input>
+        </>
+    )
+}
+Loguin.propTypes = {
+    label: PropTypes.string,
+}
+
+export default Loguin
+
+
+Fragment
+
+podemos retornar mais de um elemento que com a utilização do FRAGMENT o fragmente e um recurso do rect que nos possibilita a criação de vários elementos em um único componente sem a necessida de uma componente pai, como uma DIV desnecessaria para que possamos adicionar os elementos.
+exemplo de sintaxe:
+
+function Loguin ({label}){ 
+
+    return(
+        <>    <--inicio do fragment
+            <label className={styles.item}>{label}</label>
+            <input className={styles.item}></input>
+        </>   <-- fechamento do fragment   
+    )
+}
+
+Styles css no React
+
+para que possamos usar CSS nos nossos componentes React, precisamos criar um arquivo no estilo de módulos assim o react entende que aquele arquivo e um arquivo de stylização do elemento. após a criação importamos esse arquivo para dentro do nosso componente.
+exemplo de criação:
+
+loguin.module.css
+
+exemplo de importação:
+
+import styles from './loguin.module.css'
+
+as formas de sintaxe tanto no css como a nomeação das class acontece da mesma forma 
+
+CSS geral 
+
+temos um arquivo dentro da nossa pasta SRC chamado Index.css ele e o arquivo de Css geral podemos utiliza-lo para modificar todos elementos globais, exemplo font, cor, tamanhos. 
+
+
+EVENTOS NO React
+
+os eventos no react se assemelha aos eventos usados no DOM a única diferença e que ao invez de se chamar um evento atravez do addevntlistner, colocamos o evento diretamente no elemento juntamente com sua função também podendo importar funções, para os eventos.
+
+<script>
+function Evento (){
+    function MeuEvento(){
+        alert("deu bom")}
+    return(
+        <>
+        <p>teste do evento</p>
+        <button onClick={MeuEvento}>CLIQUE</button>
+        </>)}
+export default Evento
+<script/>
+
+                STATE LIFT
+
+o state lift e usando para compartilhar as informações de um elemnto para que tenha mais de um resulta na aplicação.
+
+usamos da mesma forma o usestate a diferença e que definimos o seu valor no elemento que está recebendo os dados de ambos os elementos.
+
+exemple temos um imput em um elemento filho e queremos que esse resultado desse elemento var além do seu elemento filho, então setamos esse valor no seu elemento pai assim compartilhando o elemento para mais de uma função.
+
+                    REACT ROUTES 
+
+O react routes e a forma que temos de criar rotas entre nossos componentes dentro da nossas páginas, utilizamo o pacote react-route-dom para que possamos criar com mais facilidade integração entre uma página e outra da nossa aplicação.
+
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import Home from './pages/Home';
+import Contato from './pages/Contato';
+import Empresa from './pages/Empresa';
+
+function App() {
+  return (<Router>
+    <ul>
+      <li>
+        <Link to='/'>Home</Link>
+      </li>
+      <li>
+        <Link to='/empresa'>Empresa</Link>
+      </li>
+      <li>
+        <Link to='/contato'>Contato</Link>
+      </li>
+    </ul>
+    
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/empresa" element={<Empresa/>} />
+        <Route path="/contato" element={<Contato/>} />
+      </Routes>
+    
+  </Router>)
+}
+
+export default App;
+
+instalamos o react-route-dom atraves do comando no terminal:
+
+npm install react-route-dom
+
+as páginas são criadas como elementos e são redenridas no app.js
+
+todas as páginas filhas são envolvida pelas <Roter></Roter> que recebe os elementos que serão mostrados na tela, atravez da tag <Link><Link/> que recebe um atributo que funciona como o SRC='' que define o caminho de cada rota, exemplo, <Link to='/empresa'>Empresa</Link>
+
+as rotas são definidas pelos os elementos <Routes></Routes> que recebem o elemento <Route></Route> que define cada roda mencionada nos link acima.
+<Route exact path="/" element={<Home />} />
+quando utilizamos a barra para criar nosso caminhos, esse caminho fica atrelados a todas as páginas para que não seja aberta apenas a página raiz (HOME) usamos o atributo EXACT para que use exatamente o caminho que passamos para sua rota. 
